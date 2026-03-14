@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 import { Link } from 'expo-router';
 
 import { ThemedText } from '@/components/themed-text';
@@ -19,15 +19,23 @@ export default function HomeScreen() {
     ...styles.ctaText,
     color: isDark ? '#11181C' : '#fff',
   };
+  const containerStyle =
+    Platform.OS === 'web'
+      ? { ...styles.container, minHeight: '100vh' as unknown as number }
+      : styles.container;
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={containerStyle}>
       <View style={styles.content}>
         <ThemedText type="title" style={styles.title}>
-          Filing App
+          Alamait · Centurion
         </ThemedText>
-        <ThemedText style={styles.subtitle}>
-          Organize, file, and find what you need—all in one place.
+        <ThemedText style={styles.tagline}>
+          Your Properties. Perfectly Managed.
+        </ThemedText>
+        <ThemedText style={styles.description}>
+          A secure, centralised filing system for Alamait's full property portfolio — registers,
+          insurance tracking, asset inventories and document management, all in one place.
         </ThemedText>
         <Link href="/(tabs)/explore" asChild>
           <View style={ctaButtonStyle}>
@@ -47,17 +55,25 @@ const styles = StyleSheet.create({
   },
   content: {
     alignItems: 'center',
-    maxWidth: 400,
+    maxWidth: 480,
     alignSelf: 'center',
   },
   title: {
-    marginBottom: 12,
+    marginBottom: 8,
     textAlign: 'center',
   },
-  subtitle: {
+  tagline: {
+    fontSize: 20,
+    fontWeight: '600',
+    textAlign: 'center',
+    marginBottom: 20,
+    opacity: 0.95,
+  },
+  description: {
     textAlign: 'center',
     marginBottom: 32,
     opacity: 0.9,
+    lineHeight: 24,
   },
   cta: {
     paddingVertical: 14,
