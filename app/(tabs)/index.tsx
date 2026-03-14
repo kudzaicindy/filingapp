@@ -9,6 +9,16 @@ import { Colors } from '@/constants/theme';
 export default function HomeScreen() {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
+  const isDark = colorScheme === 'dark';
+
+  const ctaButtonStyle = {
+    ...styles.cta,
+    backgroundColor: colors.tint,
+  };
+  const ctaTextStyle = {
+    ...styles.ctaText,
+    color: isDark ? '#11181C' : '#fff',
+  };
 
   return (
     <ThemedView style={styles.container}>
@@ -20,10 +30,8 @@ export default function HomeScreen() {
           Organize, file, and find what you need—all in one place.
         </ThemedText>
         <Link href="/(tabs)/explore" asChild>
-          <View style={[styles.cta, { backgroundColor: colors.tint }]}>
-            <ThemedText style={[styles.ctaText, { color: colorScheme === 'dark' ? '#11181C' : '#fff' }]}>
-              Explore
-            </ThemedText>
+          <View style={ctaButtonStyle}>
+            <ThemedText style={ctaTextStyle}>Explore</ThemedText>
           </View>
         </Link>
       </View>

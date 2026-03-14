@@ -17,20 +17,17 @@ export function ThemedText({
 }: ThemedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
-  return (
-    <Text
-      style={[
-        { color },
-        type === 'default' ? styles.default : undefined,
-        type === 'title' ? styles.title : undefined,
-        type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
-        type === 'subtitle' ? styles.subtitle : undefined,
-        type === 'link' ? styles.link : undefined,
-        style,
-      ]}
-      {...rest}
-    />
-  );
+  const flattenedStyle = StyleSheet.flatten([
+    { color },
+    type === 'default' ? styles.default : undefined,
+    type === 'title' ? styles.title : undefined,
+    type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
+    type === 'subtitle' ? styles.subtitle : undefined,
+    type === 'link' ? styles.link : undefined,
+    style,
+  ]);
+
+  return <Text style={flattenedStyle} {...rest} />;
 }
 
 const styles = StyleSheet.create({
